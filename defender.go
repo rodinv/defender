@@ -19,6 +19,7 @@ type Client struct {
 func (c *Client) Key() interface{}  { return c.key }
 func (c *Client) Banned() bool      { return c.banned }
 func (c *Client) Expire() time.Time { return c.expire }
+func (c *Client) BanExpired() bool  { return c.banned && time.Now().After(c.expire) }
 
 // Defender keep tracks if the `Client`s and maintains the banlist
 type Defender struct {
