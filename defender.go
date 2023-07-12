@@ -103,6 +103,12 @@ func (d *Defender) Inc(key interface{}) bool {
 	return banned
 }
 
+func (d *Defender) ForgetClient(key interface{}) {
+	d.Lock()
+	defer d.Unlock()
+	delete(d.clients, key)
+}
+
 // Cleanup should be used if you want to manage the cleanup yourself, looks for CleanupTask for an automatic way
 func (d *Defender) Cleanup() {
 	d.Lock()
